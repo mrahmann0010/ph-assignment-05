@@ -64,10 +64,9 @@ const helplineData = [
   }
 ];
 
-
 const mainCon = document.getElementById("main-lists");
 
-helplineData.forEach(item=> {
+helplineData.forEach((item, index)=> {
   mainCon.innerHTML += `
     <div class="flex flex-col px-5 py-5 rounded-xl bg-red-900">
       <div class="flex items-center justify-between">
@@ -84,8 +83,58 @@ helplineData.forEach(item=> {
 
       <div class="flex justify-between py-4">
           <button class="btn copy-text btn-outline">Default</button>
-          <button class="call-num btn btn-active btn-success">Success</button>
+          <button class="call-num btn btn-active btn-success" data-index="${index}" 
+          data-heading="${item.heading}" data-number="${item.number}">
+            Success
+          </button>
       </div>
     </div>
   `;
 });
+
+
+// Button Functionality
+// Adding to Call List
+const secondCon = document.getElementById("call-history");
+const callButons = document.querySelectorAll('.call-num');
+let callList = [];
+
+callButons.forEach(button=> {
+  button.addEventListener('click', (event)=> {
+    event.preventDefault();
+    const selectedButton = event.target;
+    const [heading, number] = [selectedButton.dataset.heading, selectedButton.dataset.number];
+    const callEntry = {heading, number};
+    console.log(callEntry);
+    callList.unshift(callEntry);
+    console.log(callList);
+
+    const prevHistory = document.querySelectorAll('.call-entry');
+    prevHistory.forEach(el=>el.remove());
+    
+    callList.forEach((item,index)=>{
+      secondCon.innerHTML += `
+        <div class="call-entry flex items-center justify-between px-4 py-4">
+          <span class="flex flex-col">
+            <h6 class="text-xl text-black font-medium">${item.heading}</h6>
+            <p class="text-md text-black">${item.number}</p>
+          </span>
+                
+          <span class="block text-sm text-black font-thin">11.36 PM</span>
+
+        </div>
+      `
+    });
+    
+  });
+});
+
+// Clearing History
+const clearButton = document.querySelector('.call-clear');
+console.log(clearButton);
+clearButton.addEventListener('click', (event)=> {
+  // event.preventDefault();
+  console.log('clicked');
+  callList.length = 0;
+  console.log(callList);
+})
