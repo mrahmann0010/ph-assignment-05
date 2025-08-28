@@ -95,20 +95,23 @@ helplineData.forEach((item, index)=> {
 
 // Button Functionality
 // Adding to Call List
-const secondCon = document.getElementById("call-history");
+const secondCon = document.getElementById("call-entries");
 const callButons = document.querySelectorAll('.call-num');
 let callList = [];
 
 callButons.forEach(button=> {
   button.addEventListener('click', (event)=> {
     event.preventDefault();
+
+    window.alert('Making a call');
+
     const selectedButton = event.target;
     const [heading, number] = [selectedButton.dataset.heading, selectedButton.dataset.number];
     const callEntry = {heading, number};
-    console.log(callEntry);
+    // console.log(callEntry);
     callList.unshift(callEntry);
-    console.log(callList);
 
+    // Removing prev Call History before rendering new History
     const prevHistory = document.querySelectorAll('.call-entry');
     prevHistory.forEach(el=>el.remove());
     
@@ -129,12 +132,11 @@ callButons.forEach(button=> {
   });
 });
 
+
 // Clearing History
 const clearButton = document.querySelector('.call-clear');
-console.log(clearButton);
 clearButton.addEventListener('click', (event)=> {
-  // event.preventDefault();
-  console.log('clicked');
+  event.preventDefault();
   callList.length = 0;
-  console.log(callList);
-})
+  secondCon.innerHTML = "";
+});
