@@ -72,7 +72,7 @@ helplineData.forEach((item, index)=> {
       <div class="flex items-center justify-between">
 
           <div class="bg-red-100 p-2 rounded-lg">
-            <img src="${item.icon}" class="w-8"/>
+            <img src="${item.icon}" class="w-8" alt="${item.heading}"/>
           </div>
 
           <button class="fav-button">
@@ -242,3 +242,28 @@ copyButtons.forEach(button=> {
     });
   });
 });
+
+// Window Alert -- Using Toast DaisyUI
+// const toastContainer = document.getElementById('toast-container');
+// const showToast = (message, type='info') => {
+  
+//   const toast = document.createElement('div');
+//   toast.className = 'alert' + (
+//     type === 'success' ? 'alert-success':
+//     type === 'error' ? 'alert-error':
+//     type === 'warning' ? 'alert-warning':
+//     'alert-info'
+//   );
+
+//   toast.innerHTML = `
+//     <span>${message}</span>
+//   `;
+
+//   toastContainer.appendChild(toast);
+//   // Remove after 3s
+//   setTimeout(() => {
+//     toast.remove();
+//   }, 3000);
+
+//   console.log(message, type);
+// }
